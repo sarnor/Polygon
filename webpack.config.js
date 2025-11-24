@@ -191,7 +191,10 @@ export default (env, options) => {
     console.log("🚀 ~ env:", options)
     if (options.mode === 'development') {
         webpackConfig.devtool = 'eval-source-map';
-        webpackConfig.devServer = { port: process.env.PORT };
+        webpackConfig.devServer = {
+            watchFiles: ['src/**/*.html'],
+            port: process.env.PORT
+        };
     } else if (options.mode === 'production') {
         webpackConfig.devtool = 'source-map';
     }
