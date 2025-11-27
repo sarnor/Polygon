@@ -16,7 +16,10 @@ const buildListRadioChannels = (items) => {
         tracksWrapper.insertAdjacentElement('beforeend', newDiv.cloneNode(true))
     });
 }
+window.addEventListener('mouseleave', e => {
+    console.log(e);
 
+})
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -39,6 +42,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 tracksWrapper.classList.toggle('center')
 
             })
+        })
+        .finally(() => {
+            let loading = document.querySelector('.loader');
+            console.log("🚀 ~ loading:", loading)
+            // setTimeout(() => , 2222)
+            loading.classList.add('remove')
         })
         .catch(err => {
             console.log(err, 'Error');
