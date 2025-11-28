@@ -9,25 +9,7 @@ body {
     min-height: 100dvh;
     background-color: #272727;
 
-    & .loader {
-        z-index: 99999;
-        position: fixed;
-        width: 100dvw;
-        height: 100dvh;
-        background-color: #272727;
-        display: flex;
-        justify-content: center;
-        align-items: center;
 
-        &.remove {
-            display: none;
-        }
-
-        svg {
-            color: brown;
-            font-size: 45px;
-        }
-    }
 
     & #root {
         min-height: 100dvh;
@@ -57,6 +39,8 @@ body {
             flex-direction: column;
             justify-content: flex-end;
 
+
+
             & .radio-control-panel {
 
                 min-height: 300px;
@@ -69,7 +53,7 @@ body {
                 position: absolute;
                 height: 40dvh;
                 z-index: 888;
-                background-color: aliceblue;
+                background-color: rgb(255, 255, 255);
                 top: 50%;
                 left: 200%;
                 overflow-y: scroll;
@@ -79,6 +63,10 @@ body {
                 gap: 10px;
                 transform: translate(-50%, -50%);
                 transition: all .5s;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
 
                 &.center {
                     left: 50%;
@@ -86,9 +74,31 @@ body {
 
                 & .track {
                     background-color: #272727;
+                    width: 250px;
+
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 15px;
 
                     span {
                         color: wheat;
+                        font-family: sans-serif;
+
+                        overflow: hidden;
+                        margin: 5px;
+                        padding: 2px;
+
+                        &:first-child {
+                            width: 60px;
+                            text-align: right;
+                        }
+
+                        &:last-child {
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            width: 180px;
+
+                        }
                     }
                 }
             }

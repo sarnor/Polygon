@@ -5,8 +5,13 @@ import '../styles/sass/index.sass';
 import '../resource/fontawesome-pro-6.2.1-web/js/all.js';
 
 
-let maimPromise, tracksWrapper, trackList;
+let maimPromise, tracksWrapper, trackList, loading;
 
+
+maimPromise = new Promise((resolve, reject) => {
+    import('./channels/index.js')
+        .then(e => resolve(e.channels))
+})
 
 const buildListRadioChannels = (items) => {
     items.forEach((element, index) => {
@@ -16,25 +21,27 @@ const buildListRadioChannels = (items) => {
         tracksWrapper.insertAdjacentElement('beforeend', newDiv.cloneNode(true))
     });
 }
-window.addEventListener('mouseleave', e => {
-    console.log(e);
+// window.addEventListener('wheel', e => console.log(e))
 
-})
 
 
 window.addEventListener('DOMContentLoaded', () => {
-
-    import('./channels/index.js')
+    maimPromise
+        .then(data => {
+            loading = document.querySelector('.loader');
+            return data
+        })
         .then(data => {
             tracksWrapper = document.querySelector('.tracks-wrapper')
             return data
         })
         .then(data => {
-            buildListRadioChannels(data.channels)
+            buildListRadioChannels(data)
+            console.log("🚀 ~ data:", data)
         })
         .then(() => {
             trackList = document.querySelectorAll('.track')
-            console.log(trackList);
+
         })
         .then(() => {
             document.body.addEventListener('click', () => {
@@ -44,12 +51,9 @@ window.addEventListener('DOMContentLoaded', () => {
             })
         })
         .finally(() => {
-            let loading = document.querySelector('.loader');
-            console.log("🚀 ~ loading:", loading)
-            // setTimeout(() => , 2222)
             loading.classList.add('remove')
         })
         .catch(err => {
-            console.log(err, 'Error');
+            console.log(err, 'Errddddddddddddddddddddddddddddddddddddor');
         })
 })
