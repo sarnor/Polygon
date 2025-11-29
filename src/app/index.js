@@ -1,11 +1,13 @@
+let maimPromise, tracksWrapper, trackList, loading, pagePromise;
 import '../styles/css/index.css';
 import '../styles/less/index.less';
 import '../styles/scss/index.scss';
 import '../styles/sass/index.sass';
 import '../resource/fontawesome-pro-6.2.1-web/js/all.js';
 
+import { httpAjax } from './httpAjax/index.js'
 
-let maimPromise, tracksWrapper, trackList, loading;
+
 
 
 maimPromise = new Promise((resolve, reject) => {
@@ -21,11 +23,13 @@ const buildListRadioChannels = (items) => {
         tracksWrapper.insertAdjacentElement('beforeend', newDiv.cloneNode(true))
     });
 }
-// window.addEventListener('wheel', e => console.log(e))
+
 
 
 
 window.addEventListener('DOMContentLoaded', () => {
+
+
     maimPromise
         .then(data => {
             loading = document.querySelector('.loader');
@@ -47,8 +51,18 @@ window.addEventListener('DOMContentLoaded', () => {
             document.body.addEventListener('click', () => {
                 console.log('click body');
                 tracksWrapper.classList.toggle('center')
-
             })
+        })
+        .then(() => {
+            httpAjax('GET', '/views/gallery/index.html', 'text')
+                .then(html => {
+                    console.log('HTML length:', html.length);
+                    console.log('HTML', html);
+                    // Можно вставить в DOM
+                    document.querySelector('main').insertAdjacentHTML('beforeend', html)
+                })
+                .catch(err => console.error('AJAX error:', err));
+
         })
         .finally(() => {
             loading.classList.add('remove')

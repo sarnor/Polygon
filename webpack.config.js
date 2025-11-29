@@ -7,6 +7,11 @@ import HtmlWebpackInjector from "html-webpack-injector";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+
+
+
+
 //////////////////////////////////
 
 
@@ -160,6 +165,11 @@ const webpackConfig = {
         maxAssetSize: 512000
     },
     plugins: [
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'src/views', to: 'views' }
+            ]
+        }),
         new MiniCssExtractPlugin({
             filename: 'styles/index.css'
         }),
@@ -193,7 +203,11 @@ export default (env, options) => {
         webpackConfig.devtool = 'eval-source-map';
         webpackConfig.devServer = {
             watchFiles: ['src/**/*.html'],
-            port: process.env.PORT
+            port: process.env.PORT,
+            static: {
+                directory: path.join(__dirname, 'src/views'), // раздавать HTML в dev
+                publicPath: '/views',
+            }
         };
     } else if (options.mode === 'production') {
         webpackConfig.devtool = 'source-map';
