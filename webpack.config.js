@@ -1,6 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(
+    import.meta.url);
 const __dirname = path.dirname(__filename);
 //////////////////////////////////
 import HtmlWebpackInjector from "html-webpack-injector";
@@ -33,16 +34,15 @@ const webpackConfig = {
         publicPath: '/'
     },
     module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
-            },
+            rules: [{
+                        test: /\.tsx?$/,
+                        use: 'ts-loader',
+                        exclude: /node_modules/,
+                    },
+                    {
+                        test: /\.css$/i,
+                        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+                    },
             {
                 test: /\.less$/i,
                 use: [
@@ -82,50 +82,43 @@ const webpackConfig = {
                 include: [
                     path.join(__dirname, 'src', "media", "music"),
                 ],
-                use: [
-                    {
-                        loader: "file-loader",
-                        options: {
-                            name: "media/music/[name].[ext]",
-                        },
+                use: [{
+                    loader: "file-loader",
+                    options: {
+                        name: "media/music/[name].[ext]",
                     },
-                ],
+                }, ],
             },
             {
                 test: /\.(mp4|webm|ogv|3GP)$/,
                 include: [
                     path.join(__dirname, 'src', "media", "video"),
                 ],
-                use: [
-                    {
-                        loader: "file-loader",
-                        options: {
-                            name: "media/video/[name].[ext]",
-                        },
+                use: [{
+                    loader: "file-loader",
+                    options: {
+                        name: "media/video/[name].[ext]",
                     },
-                ],
+                }, ],
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
                 include: [
                     path.resolve(__dirname, 'src', "fonts"),
                 ],
-                use: [
-                    {
-                        loader: "file-loader",
-                        options: {
-                            name: "resource/fonts/[name].[ext]",
-                        },
+                use: [{
+                    loader: "file-loader",
+                    options: {
+                        name: "resource/fonts/[name].[ext]",
                     },
-                ],
+                }, ],
             },
             {
                 test: /\.html$/i,
                 loader: "html-loader",
                 options: {
                     sources: {
-                        list: [
-                            {
+                        list: [{
                                 tag: 'source',
                                 attribute: 'src-set',
                                 type: 'srcset'
