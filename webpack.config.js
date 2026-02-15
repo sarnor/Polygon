@@ -34,119 +34,119 @@ const webpackConfig = {
         publicPath: '/'
     },
     module: {
-            rules: [{
-                        test: /\.tsx?$/,
-                        use: 'ts-loader',
-                        exclude: /node_modules/,
+        rules: [{
+            test: /\.tsx?$/,
+            use: 'ts-loader',
+            exclude: /node_modules/,
+        },
+        {
+            test: /\.css$/i,
+            use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+        },
+        {
+            test: /\.less$/i,
+            use: [
+                MiniCssExtractPlugin.loader,
+                'css-loader',
+                'postcss-loader',
+                'less-loader',
+            ],
+        },
+        {
+            test: /\.sass$/i,
+            use: [
+                MiniCssExtractPlugin.loader,
+                'css-loader',
+                'postcss-loader',
+                'sass-loader',
+            ],
+        },
+        {
+            test: /\.scss$/i,
+            use: [
+                MiniCssExtractPlugin.loader,
+                'css-loader',
+                'postcss-loader',
+                'sass-loader',
+            ],
+        },
+        {
+            test: /\.(svg|png|jpg|jpeg|webp|gif|icon)$/i,
+            type: 'asset/resource',
+            generator: {
+                filename: path.join('[path][name][ext]'),
+            },
+        },
+        {
+            test: /\.(mp3|wav|ogg)$/,
+            include: [
+                path.join(__dirname, 'src', "media", "music"),
+            ],
+            use: [{
+                loader: "file-loader",
+                options: {
+                    name: "media/music/[name].[ext]",
+                },
+            },],
+        },
+        {
+            test: /\.(mp4|webm|ogv|3GP)$/,
+            include: [
+                path.join(__dirname, 'src', "media", "video"),
+            ],
+            use: [{
+                loader: "file-loader",
+                options: {
+                    name: "media/video/[name].[ext]",
+                },
+            },],
+        },
+        {
+            test: /\.(eot|svg|ttf|woff|woff2)$/,
+            include: [
+                path.resolve(__dirname, 'src', "fonts"),
+            ],
+            use: [{
+                loader: "file-loader",
+                options: {
+                    name: "resource/fonts/[name].[ext]",
+                },
+            },],
+        },
+        {
+            test: /\.html$/i,
+            loader: "html-loader",
+            options: {
+                sources: {
+                    list: [{
+                        tag: 'source',
+                        attribute: 'src-set',
+                        type: 'srcset'
                     },
                     {
-                        test: /\.css$/i,
-                        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+                        tag: 'img',
+                        attribute: 'data-src',
+                        type: 'src'
                     },
-            {
-                test: /\.less$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'postcss-loader',
-                    'less-loader',
-                ],
-            },
-            {
-                test: /\.sass$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'postcss-loader',
-                    'sass-loader',
-                ],
-            },
-            {
-                test: /\.scss$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'postcss-loader',
-                    'sass-loader',
-                ],
-            },
-            {
-                test: /\.(svg|png|jpg|jpeg|webp|gif|icon)$/i,
-                type: 'asset/resource',
-                generator: {
-                    filename: path.join('[path][name][ext]'),
+                    {
+                        tag: 'img',
+                        attribute: 'src',
+                        type: 'src'
+                    },
+                    {
+                        tag: 'source',
+                        attribute: 'srcset',
+                        type: 'srcset'
+                    },
+                    {
+                        tag: 'source',
+                        attribute: 'data-srcset',
+                        type: 'srcset'
+                    }
+                    ],
                 },
             },
-            {
-                test: /\.(mp3|wav|ogg)$/,
-                include: [
-                    path.join(__dirname, 'src', "media", "music"),
-                ],
-                use: [{
-                    loader: "file-loader",
-                    options: {
-                        name: "media/music/[name].[ext]",
-                    },
-                }, ],
-            },
-            {
-                test: /\.(mp4|webm|ogv|3GP)$/,
-                include: [
-                    path.join(__dirname, 'src', "media", "video"),
-                ],
-                use: [{
-                    loader: "file-loader",
-                    options: {
-                        name: "media/video/[name].[ext]",
-                    },
-                }, ],
-            },
-            {
-                test: /\.(eot|svg|ttf|woff|woff2)$/,
-                include: [
-                    path.resolve(__dirname, 'src', "fonts"),
-                ],
-                use: [{
-                    loader: "file-loader",
-                    options: {
-                        name: "resource/fonts/[name].[ext]",
-                    },
-                }, ],
-            },
-            {
-                test: /\.html$/i,
-                loader: "html-loader",
-                options: {
-                    sources: {
-                        list: [{
-                                tag: 'source',
-                                attribute: 'src-set',
-                                type: 'srcset'
-                            },
-                            {
-                                tag: 'img',
-                                attribute: 'data-src',
-                                type: 'src'
-                            },
-                            {
-                                tag: 'img',
-                                attribute: 'src',
-                                type: 'src'
-                            },
-                            {
-                                tag: 'source',
-                                attribute: 'srcset',
-                                type: 'srcset'
-                            },
-                            {
-                                tag: 'source',
-                                attribute: 'data-srcset',
-                                type: 'srcset'
-                            }
-                        ],
-                    },
-                },
-            },
+        },
         ],
     },
     resolve: {
@@ -197,6 +197,7 @@ export default (env, options) => {
         webpackConfig.devServer = {
             watchFiles: ['src/**/*.html'],
             port: process.env.PORT,
+            host: '0.0.0.0',
             static: {
                 directory: path.join(__dirname, 'src/views'), // раздавать HTML в dev
                 publicPath: '/views',

@@ -9,8 +9,6 @@ body {
     min-height: 100dvh;
     background-color: #272727;
 
-
-
     & #root {
         min-height: 100dvh;
         display: grid;
