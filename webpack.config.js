@@ -17,7 +17,7 @@ dotenv.config();
 const webpackConfig = {
     entry: {
         index: './src/app/index.js',
-        _index_head: './src/app/_head_index.js'
+        'index-head': './src/app/_head_index.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -156,7 +156,7 @@ const webpackConfig = {
             filename: 'index.html',
             template: './src/index.html',
             scriptLoading: 'module',
-            chunks: ['index', '_index_head'],
+            chunks: ['index', 'index-head'],
             inject: 'body',
             title: 'Public',
             favicon: './fav/fav.png'

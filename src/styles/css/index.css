@@ -42,7 +42,7 @@ body {
             & .radio-control-panel {
 
                 min-height: 300px;
-                border: 2px solid rgb(90, 210, 5);
+                border: 2px solid rgb(5, 169, 210);
                 border-radius: 15px;
                 margin: 0 15px 15px 15px;
             }
