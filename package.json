@@ -10,6 +10,7 @@
   },
   "scripts": {
     "start": "webpack  serve  --mode development --open",
+    "prod": "node  server.js",
     "build": "webpack   --mode production"
   },
   "repository": {
@@ -42,6 +43,6 @@
   },
   "dependencies": {
     "dotenv": "^17.2.3",
-    "express": "^5.1.0"
+    "express": "^5.2.1"
   }
 }

@@ -10,19 +10,10 @@ import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-
-
-
 //////////////////////////////////
-
-
 import dotenv from 'dotenv';
 dotenv.config();
-
 //////////////////////////////////
-
-
-
 const webpackConfig = {
     entry: {
         index: './src/app/index.js',
@@ -158,17 +149,13 @@ const webpackConfig = {
         maxAssetSize: 512000
     },
     plugins: [
-        new CopyWebpackPlugin({
-            patterns: [
-                { from: 'src/views', to: 'views' }
-            ]
-        }),
         new MiniCssExtractPlugin({
             filename: 'styles/index.css'
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: './src/index.html',
+            scriptLoading: 'module',
             chunks: ['index', '_index_head'],
             inject: 'body',
             title: 'Public',
