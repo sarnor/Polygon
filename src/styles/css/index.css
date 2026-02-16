@@ -37,29 +37,43 @@ body {
             flex-direction: column;
             justify-content: flex-end;
 
+            canvas {
+                display: block;
+            }
 
+            & #box {
+                width: 200px;
+                height: 200px;
+                background: rgb(2, 164, 219);
+
+                &.green {
+                    background-color: green;
+                }
+
+                &.red {
+                    background-color: red;
+                }
+            }
 
             & .radio-control-panel {
-
                 min-height: 300px;
-                border: 2px solid rgb(5, 169, 210);
+                border: 2px solid rgb(5, 160, 171);
                 border-radius: 15px;
                 margin: 0 15px 15px 15px;
             }
 
             & .tracks-wrapper {
                 position: absolute;
-                height: 40dvh;
+                height: 90dvh;
+                max-width: 400px;
+                width: 50dvw;
                 z-index: 888;
-                background-color: rgb(255, 255, 255);
                 top: 50%;
                 left: 200%;
-                overflow-y: scroll;
+                overflow-y: auto;
                 overflow-x: hidden;
-                display: flex;
-                flex-direction: column;
                 gap: 10px;
-                transform: translate(-50%, -50%);
+                translate: -50% -50%;
                 transition: all .5s;
                 display: flex;
                 flex-direction: column;
@@ -73,7 +87,6 @@ body {
                 & .track {
                     background-color: #272727;
                     width: 250px;
-
                     display: flex;
                     align-items: flex-start;
                     gap: 15px;
