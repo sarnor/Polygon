@@ -1,20 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+.pause-element {
+    position: fixed;
+    height: 100dvh;
+    width: 100dvw;
+    background-color: #00000055;
+    z-index: 0;
+    display: flex;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.5s;
+
+    span {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 5px solid white;
+        color: aliceblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        svg {
+            font-size: 55px;
+            color: aliceblue;
+            font-weight: 900;
+        }
+    }
+
+    &.show {
+        opacity: 1;
+        z-index: 9999;
+    }
+}
+
 html,
 body {
     min-height: 100dvh;
-    background-color: #272727;
+    max-width: 100dvw;
+    background-color: #000000;
+
+    canvas {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 80;
+        display: block;
+        position: fixed;
+        inset: 0;
+    }
 
     & #root {
         min-height: 100dvh;
         display: grid;
         grid-template-rows: auto 1fr auto;
+        z-index: 88;
+        position: relative;
 
         header {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+
+            .ch {
+                align-self: flex-end;
+                background-color: aliceblue;
+                color: #0f172a;
+                font-size: 25px;
+                border-radius: 5px;
+                width: 50px;
+                height: 50px;
+                text-align: center;
+                align-content: center;
+                cursor: pointer;
+            }
+
             h1 {
                 text-align: center;
                 color: aliceblue;
@@ -31,109 +104,114 @@ body {
         }
 
         main {
-            position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
 
-            canvas {
-                display: block;
-            }
-
-            & #box {
-                width: 200px;
-                height: 200px;
-                background: rgb(2, 164, 219);
-
-                &.green {
-                    background-color: green;
-                }
-
-                &.red {
-                    background-color: red;
-                }
-            }
-
             & .radio-control-panel {
+                position: fixed;
+                height: 100px;
+                width: 80vw;
                 min-height: 300px;
                 border: 2px solid rgb(5, 160, 171);
                 border-radius: 15px;
                 margin: 0 15px 15px 15px;
+                translate: -50%;
+                left: 50%;
+                bottom: -150%;
+                transition: bottom .8s;
+
+                &.show {
+                    bottom: 15px;
+                }
             }
 
             & .tracks-wrapper {
-                position: absolute;
-                height: 90dvh;
-                max-width: 400px;
-                width: 50dvw;
+                position: fixed;
                 z-index: 888;
-                top: 50%;
-                left: 200%;
-                overflow-y: auto;
-                overflow-x: hidden;
-                gap: 10px;
                 translate: -50% -50%;
+                top: 50%;
+                height: 90dvh;
+                flex-wrap: wrap;
+                width: 90dvw;
+                left: 200%;
+                overflow-y: hidden;
+                overflow-x: auto;
+                gap: 10px;
                 transition: all .5s;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
 
-                &.center {
+                &.show {
                     left: 50%;
                 }
 
                 & .track {
-                    background-color: #272727;
-                    width: 250px;
+                    background: linear-gradient(160deg,
+                            #111827,
+                            #44213a,
+                            #0f172a);
+                    border-radius: 5%;
+                    height: 150px;
+                    width: 350px;
                     display: flex;
-                    align-items: flex-start;
+                    flex-direction: column;
                     gap: 15px;
 
                     span {
+                        cursor: pointer;
                         color: wheat;
                         font-family: sans-serif;
-
                         overflow: hidden;
                         margin: 5px;
                         padding: 2px;
+                        --main-pass-color: rgb(72, 255, 0);
+                        width: 300px;
+                        background-color: #00000099;
+                        padding: 10px;
 
                         &:first-child {
                             width: 60px;
+                            height: 60px;
+                            border-radius: 50%;
                             text-align: right;
+                            align-self: self-start;
+                            text-align: center;
+                            align-content: center;
+                            position: relative;
+
+
+                            &::after {
+                                position: absolute;
+                                content: "";
+                                width: 100px;
+                                height: 19px;
+                                background-color: var(--main-pass-color);
+                                bottom: 0px;
+                                left: 0;
+                            }
                         }
 
                         &:last-child {
+                            align-self: center;
                             white-space: nowrap;
                             text-overflow: ellipsis;
                             width: 180px;
-
+                            text-align: center;
+                            color: var(--main-pass-color);
+                            font-family: "Roboto", sans-serif;
+                            font-optical-sizing: auto;
+                            font-weight: 200;
+                            font-style: normal;
+                            font-variation-settings:
+                                "wdth" 100;
                         }
                     }
                 }
             }
-
         }
-
-        footer {
-            background-color: aliceblue;
-        }
-    }
-}
-
-
-
-@keyframes rotation {
-    0% {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
     }
 }

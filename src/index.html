@@ -5,12 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        .loader.remove {
-            display: none;
-        }
-
         .loader {
-            z-index: 99999;
+            z-index: 9999;
             position: fixed;
             width: 100dvw;
             height: 100dvh;
@@ -47,11 +43,16 @@
 </head>
 
 <body>
+    <div class="pause-element">
+        <span>
+            <i class="fa-regular fa-pause"></i>
+        </span>
+    </div>
     <div class="loader">
         <div><span>Loading</span><span>.</span><span>.</span><span>.</span></div>
     </div>
+    <canvas id="canvas"></canvas>
     <div id="root">
-
         <header>
             <h1>
                 Sarnor.GitHub.io
@@ -59,15 +60,12 @@
                     Online radio
                 </span>
             </h1>
+            <div class="ch">CH</div>
         </header>
         <main>
-            <canvas id="canvas"></canvas>
-            <div class="radio-control-panel">
-            </div>
-            <div class="tracks-wrapper">
-            </div>
+            <div class="tracks-wrapper"></div>
+            <div class="radio-control-panel"></div>
         </main>
-        <footer>Footer</footer>
     </div>
 </body>
 
