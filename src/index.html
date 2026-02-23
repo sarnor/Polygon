@@ -43,13 +43,9 @@
 </head>
 
 <body>
-    <div class="pause-element">
-        <span>
-            <i class="fa-regular fa-pause"></i>
-        </span>
-    </div>
+
     <div class="loader">
-        <div><span>Loading</span><span>.</span><span>.</span><span>.</span></div>
+        <!-- <div><span>Loading</span><span>.</span><span>.</span><span>.</span></div> -->
     </div>
     <canvas id="canvas"></canvas>
     <div id="root">
@@ -64,7 +60,19 @@
         </header>
         <main>
             <div class="tracks-wrapper"></div>
-            <div class="radio-control-panel"></div>
+            <div class="radio-control-panel">
+                <div class="control-panel">
+                    <div class="control play">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="control stop">
+                        <i class="fa-solid fa-stop"></i>
+                    </div>
+                </div>
+                <div class="track-name">
+
+                </div>
+            </div>
         </main>
     </div>
 </body>

@@ -11,7 +11,7 @@
     height: 100dvh;
     width: 100dvw;
     background-color: #00000055;
-    z-index: 0;
+    z-index: 9999;
     display: flex;
     top: 0;
     left: 0;
@@ -19,7 +19,7 @@
     right: 0;
     justify-content: center;
     align-items: center;
-    opacity: 0;
+    opacity: 1;
     transition: all 0.5s;
 
     span {
@@ -40,10 +40,7 @@
         }
     }
 
-    &.show {
-        opacity: 1;
-        z-index: 9999;
-    }
+
 }
 
 html,
@@ -107,23 +104,42 @@ body {
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+            justify-content: center;
+            align-items: center;
 
             & .radio-control-panel {
-                position: fixed;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                gap: 25px;
                 height: 100px;
                 width: 80vw;
                 min-height: 300px;
-                border: 2px solid rgb(5, 160, 171);
+                border: 0.4px solid rgb(255, 255, 255);
                 border-radius: 15px;
                 margin: 0 15px 15px 15px;
-                translate: -50%;
-                left: 50%;
-                bottom: -150%;
-                transition: bottom .8s;
 
-                &.show {
-                    bottom: 15px;
+                & .control-panel {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 15px;
+
+                    & .control {
+                        svg {
+                            color: wheat;
+                            font-size: 55px;
+                        }
+                    }
+                }
+
+                & .track-name {
+                    padding: 7px 20px;
+                    border-radius: 5px;
+                    border: 2px solid white;
+                    color: white;
+                    font-size: 35px;
                 }
             }
 
