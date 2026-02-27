@@ -1,6 +1,7 @@
-let rootElement, loader, tracksWrapper, hasTouch, radioControlPanel, track, radioLink, ch, pauseElement, pauseElementContent, stop, play, indexUrl, localStorageData, trackName;
+let rootElement, loader, audio, tracksWrapper, hasTouch, radioControlPanel, track, radioLink, ch, pauseElement, pauseElementContent, stopBtn, playBtn, indexUrl, trackName;
 hasTouch = window.matchMedia('(pointer: coarse)').matches;
-console.log(screen);
+console.log("🚀 ~ hasTouch:", hasTouch)
+
 
 
 pauseElementContent = `
@@ -12,9 +13,9 @@ pauseElementContent = `
 
 indexUrl = localStorage.getItem('indexItem');
 
-export const audio = new Audio();
 
-import initAudio from './waveAnimation/index.js'
+audio = new Audio();
+
 
 const mainPromise = new Promise((resolve, reject) => {
     import('./channels/index.js')
@@ -25,11 +26,15 @@ const mainPromise = new Promise((resolve, reject) => {
 })
 mainPromise
     .then(data => {
+        // window.addEventListener('DOMContentLoader', () => {})
+
         rootElement = document.querySelector('#root');
         tracksWrapper = document.querySelector('.tracks-wrapper');
         ch = document.querySelector('.ch');
-        radioControlPanel += document.querySelector('.radio-control-panel');
+        radioControlPanel = document.querySelector('.radio-control-panel');
         loader = document.querySelector('.loader');
+        trackName = document.querySelector('.track-name');
+        trackName.innerHTML = radioLink[indexUrl].name
         if (hasTouch) {
             ch.remove()
         }
@@ -65,10 +70,6 @@ mainPromise
     })
 
 
-stop = document.querySelector('.stop');
-trackName = document.querySelector('.track-name');
-play = document.querySelector('.play');
-
 const playRadio = index => {
     if (!index) {
         index = indexUrl
@@ -78,44 +79,21 @@ const playRadio = index => {
     }
     audio.crossOrigin = "anonymous";
     audio.play();
-    initAudio(audio);
+
     trackName.innerHTML = radioLink[index].name
 }
 
-play.addEventListener('click', () => {
+const stopRadio = () => {
+    audio.pause()
+    audio.src = ''
+    audio.load()
+}
+stopBtn = document.querySelector('.btn-stop');
+playBtn = document.querySelector('.btn-play');
+
+playBtn.addEventListener('click', () => {
     playRadio()
 })
-stop.addEventListener('click', () => {
-    audio.pause()
+stopBtn.addEventListener('click', () => {
+    stopRadio()
 })
-
-import { addPressListener } from './showPanelControl/index.js'
-
-// ===== Пример использования =====
-
-addPressListener(document.body,
-    e => { stopFlow(radioControlPanel, 'show'); },
-    e => { stopFlow(radioControlPanel, 'hide'); },
-    5000 // 2 секунды
-);
-
-function stopFlow(elem, position) {
-    if (position === 'show') {
-        if (!audio.paused) {
-            audio.pause();
-            rootElement.insertAdjacentHTML('beforeend', pauseElementContent);
-            pauseElement = document.querySelector('.pause-element')
-        }
-    } else if (position === 'hide') {
-        if (pauseElement) {
-            audio.play()
-            pauseElement.remove()
-        }
-    }
-}
-
-
-
-import './showChannelList/index.js';
-import './waveAnimation/index.js';
-

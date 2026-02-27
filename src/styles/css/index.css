@@ -126,7 +126,11 @@ body {
                     align-items: center;
                     gap: 15px;
 
-                    & .control {
+                    button.control {
+                        background-color: transparent;
+                        outline: none;
+                        border: none;
+
                         svg {
                             color: wheat;
                             font-size: 55px;

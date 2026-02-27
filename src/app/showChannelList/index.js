@@ -54,3 +54,9 @@ const openMenu = elem => elem.classList.add('show');
 const openPanel = elem => elem.classList.add('show');
 const closeMenu = elem => elem.classList.remove('show');
 const closePanel = elem => elem.classList.remove('show');
+
+
+/*
+app/index.js main js
+import './showChannelList/index.js'; 
+*/

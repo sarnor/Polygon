@@ -10,7 +10,6 @@
   },
   "scripts": {
     "start": "webpack  serve  --mode development --open",
-    "prod": "node  server.js",
     "build": "webpack   --mode production"
   },
   "repository": {

@@ -131,3 +131,12 @@ function animate() {
 }
 
 animate();
+
+
+/*
+main js file
+import initAudio from './waveAnimation/index.js';
+initAudio(audio);
+import './waveAnimation/index.js';
+
+*/

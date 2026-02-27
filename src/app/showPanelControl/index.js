@@ -31,3 +31,32 @@ export function addPressListener(elemPress, longPressCallback, shortPressCallbac
     elemPress.addEventListener('pointercancel', end);
     elemPress.addEventListener('pointerleave', end); // если палец ушёл с элемента
 }
+
+
+/*
+app/index.js main js 
+import { addPressListener } from './showPanelControl/index.js'
+
+// ===== Пример использования =====
+
+addPressListener(document.body,
+    e => { stopFlow(radioControlPanel, 'show'); },
+    e => { stopFlow(radioControlPanel, 'hide'); },
+    5000 // 2 секунды
+);
+
+function stopFlow(elem, position) {
+    if (position === 'show') {
+        if (!audio.paused) {
+            audio.pause();
+            rootElement.insertAdjacentHTML('beforeend', pauseElementContent);
+            pauseElement = document.querySelector('.pause-element')
+        }
+    } else if (position === 'hide') {
+        if (pauseElement) {
+            audio.play()
+            pauseElement.remove()
+        }
+    }
+}
+*/
