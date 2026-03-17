@@ -138,5 +138,17 @@ main js file
 import initAudio from './waveAnimation/index.js';
 initAudio(audio);
 import './waveAnimation/index.js';
-
+/////////////////////////////css
+    canvas {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 80;
+        display: block;
+        position: fixed;
+        inset: 0;
+    }
+        html
+        <canvas id="canvas"></canvas>
 */
